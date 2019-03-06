@@ -1,0 +1,12 @@
+.room-list {
+  background-color: $roomlistcolor;
+  display: inline-block;
+  font-family: $bodyfont;
+  padding: 5px;
+  width: 23%;
+}
+
+.room-list-hd {
+  font-family: $fancyfont;
+  font-size: 24px;
+}
