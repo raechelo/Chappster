@@ -10,8 +10,11 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      messages: []
+      messages: [],
+      joinableRooms: [],
+      joinedRooms: []
     }
+    this.sendMessage = this.sendMessage.bind(this);
   }
 
   componentDidMount() {
@@ -24,7 +27,18 @@ export default class App extends Component {
     })
     chatManager.connect()
     .then(currentUser => {
-      currentUser.subscribeToRoom({
+      this.currentUser = currentUser
+
+      this.currentUser.getJoinableRooms()
+      .then(joinableRooms => {
+        this.setState({
+          joinableRooms,
+          joinedRooms: this.currentUser.rooms
+        })
+      })
+      .catch(err => console.log('error on joinableRooms:', err))
+
+      this.currentUser.subscribeToRoom({
         roomId: '19386063',
         hooks: {
           onMessage: message => {
@@ -38,13 +52,21 @@ export default class App extends Component {
     })
   }
 
+  sendMessage(text) {
+    this.currentUser.sendMessage({
+      text,
+      // same as text: text,
+      roomId: '19386063'
+    });
+  }
+
   render() {
     return (
       <div className="App">
-          <RoomList />
+          <RoomList rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]} />
           <MessageContainer messages={this.state.messages}/>
           {/* <RoomCreate /> */}
-          <MessageCompose />
+          <MessageCompose sendMessage={this.sendMessage} />
       </div>
     );
   }
