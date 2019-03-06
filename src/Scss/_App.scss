@@ -1,0 +1,14 @@
+* {
+  box-sizing: border-box;
+  &:focus {
+    outline: none;
+  }
+}
+
+.App {
+  font-family: $bodyfont;
+  // display: grid;
+  // grid-template-areas: "list room room" "addroom addmessage addmessage";
+  // grid-template-columns: 2fr 3fr 3fr;
+  // grid-template-rows: 3fr .5fr;
+}

@@ -1,0 +1,17 @@
+.msg-container {
+  font-family: $bodyfont;
+  color: $fontcolor;
+}
+
+.message-text {
+  background-color: $msg;
+  border-radius: 15px;
+  margin: 15px;
+  padding: 5px;
+  width: 175px;
+}
+
+.message-sender {
+  font-size: 10px;
+  font-weight: lighter;
+}
